@@ -13,7 +13,7 @@
       id="pensamento"
       name="pensamento"
       placeholder="Digite o pensamento"
-      value={{pensamento.conteudo}}
+      [(ngModel)]="pensamento.conteudo"
     /> <!--ou [value]="pensamento.conteudo"-->
     <label for="autoria">Autoria ou fonte</label>
     <input
@@ -22,8 +22,9 @@
       id="autoria"
       name="autoria"
       placeholder="Digite a autoria ou fonte"
-      value={{pensamento.autoria}}
+      [(ngModel)]="pensamento.autoria"
     />
+    <!--O ngModel no Angular substitui o atributo value em um <input> porque ele oferece funcionalidades avançadas de data binding bidirecional, enquanto o value é uma configuração estática que só define o valor inicial do campo de entrada.-->
     <label for="modelo">Selecione o modelo do card:</label>
     <div class="container-radio">
         <div class="radio-modelo">
@@ -31,7 +32,7 @@
             <input
                 type="radio"
                 id="modelo1"
-                value="modelo1"
+                [(ngModel)]="pensamento.modelo"
                 name="modelo-card"
             >
             <div class="custom-radio">
@@ -50,7 +51,7 @@
             <input
                 type="radio"
                 id="modelo2"
-                value="modelo2"
+                [(ngModel)]="pensamento.modelo"
                 name="modelo-card"
             >
             <div class="custom-radio">
@@ -70,7 +71,7 @@
             <input
                 type="radio"
                 id="modelo3"
-                value="modelo3"
+                [(ngModel)]="pensamento.modelo"
                 name="modelo-card"
             >
             <div class="custom-radio">
