@@ -1,0 +1,174 @@
+A tag <router-outlet> no Angular é uma diretiva fundamental para o sistema de roteamento de aplicações de página única (Single Page Applications - SPA). Ela atua como um ponto de inserção onde os componentes correspondentes às rotas definidas são renderizados dinamicamente conforme a navegação do usuário. Vamos explorar em detalhes como ela funciona e como utilizá-la.
+
+1. Introdução ao Roteamento no Angular
+Em uma aplicação web tradicional, a navegação entre páginas envolve o carregamento de documentos HTML diferentes do servidor. No entanto, em aplicações Single Page Applications (SPA), todo o conteúdo é carregado inicialmente, e a navegação entre "páginas" ocorre dinamicamente no lado do cliente, sem recarregar a página inteira.
+
+O Angular facilita essa navegação dinâmica por meio de seu sistema de roteamento, que permite definir rotas (URLs) e associá-las a componentes específicos que serão exibidos na interface.
+
+2. O Papel do <router-outlet>
+O <router-outlet> é uma diretiva do Angular que atua como um placeholder ou âncora no template HTML onde os componentes correspondentes às rotas são injetados e renderizados. Ele é essencial para que o Angular saiba onde inserir o conteúdo baseado na rota atual.
+
+3. Como Funciona o <router-outlet>
+Configuração das Rotas:
+
+Primeiro, você define um conjunto de rotas na aplicação, associando caminhos de URL a componentes específicos.
+Navegação:
+
+Quando o usuário navega para uma determinada rota (por exemplo, clicando em um link ou alterando a URL), o Angular Router identifica a rota correspondente com base na configuração.
+Renderização:
+
+O Angular insere o componente associado à rota dentro do <router-outlet>, atualizando dinamicamente a interface sem recarregar a página.
+4. Exemplo Prático de Uso
+Vamos criar um exemplo simples para ilustrar o uso do <router-outlet>:
+
+a. Configuração das Rotas
+Primeiro, configure as rotas no arquivo de roteamento, geralmente chamado app-routing.module.ts:
+
+typescript
+Copiar código
+// app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },            // Rota padrão
+  { path: 'about', component: AboutComponent },      // Rota '/about'
+  { path: '**', redirectTo: '' }                      // Rota de fallback
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+b. Estrutura do Template Principal
+No template principal da aplicação, geralmente app.component.html, insira a tag <router-outlet> onde os componentes de rota serão renderizados:
+
+html
+Copiar código
+<!-- app.component.html -->
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/about">Sobre</a>
+</nav>
+
+<router-outlet></router-outlet>
+c. Criação dos Componentes
+Crie os componentes HomeComponent e AboutComponent que serão exibidos nas respectivas rotas:
+
+typescript
+Copiar código
+// home.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  template: `<h1>Home</h1><p>Bem-vindo à página inicial!</p>`
+})
+export class HomeComponent { }
+typescript
+Copiar código
+// about.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-about',
+  template: `<h1>Sobre</h1><p>Informações sobre a aplicação.</p>`
+})
+export class AboutComponent { }
+d. Resultado da Navegação
+Ao acessar a raiz da aplicação (/), o HomeComponent será renderizado dentro do <router-outlet>.
+Ao navegar para /about, o AboutComponent será exibido no mesmo local.
+A navegação ocorre sem recarregar a página inteira, proporcionando uma experiência mais fluida.
+5. Vários <router-outlet> e Outlets Nomeados
+O Angular permite o uso de múltiplos <router-outlet> para renderizar componentes em diferentes áreas da interface. Isso é útil para layouts mais complexos que requerem múltiplas regiões de conteúdo dinâmico.
+
+a. Outlets Padrão e Nomeados
+Outlet Padrão: O <router-outlet> sem nome é o outlet padrão.
+Outlets Nomeados: Você pode definir outlets com nomes específicos para controlar onde determinados componentes serão renderizados.
+b. Exemplo de Outlets Nomeados
+Configuração das Rotas com Outlets Nomeados:
+typescript
+Copiar código
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent, outlet: 'sidebar' }
+];
+Uso dos Outlets no Template:
+html
+Copiar código
+<!-- app.component.html -->
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/about">Sobre</a>
+  <a [routerLink]="[{ outlets: { sidebar: ['contact'] } }]">Contato</a>
+</nav>
+
+<router-outlet></router-outlet> <!-- Outlet padrão -->
+<router-outlet name="sidebar"></router-outlet> <!-- Outlet nomeado -->
+Navegação para Outlets Nomeados:
+Ao clicar no link "Contato", o ContactComponent será renderizado no <router-outlet name="sidebar">, enquanto o conteúdo principal permanece no outlet padrão.
+
+6. Benefícios do Uso de <router-outlet>
+Modularidade: Facilita a criação de interfaces modulares e reutilizáveis, onde componentes são carregados dinamicamente conforme necessário.
+Performance: Evita recarregamentos completos da página, melhorando a performance e a experiência do usuário.
+Organização: Mantém a aplicação organizada, separando claramente o conteúdo que é gerenciado pelo roteamento do restante da interface.
+7. Considerações Finais
+A tag <router-outlet> é essencial para implementar o roteamento em aplicações Angular, permitindo que diferentes componentes sejam carregados dinamicamente com base na URL atual. Ao utilizar <router-outlet>, você pode criar interfaces ricas e responsivas que se comportam de maneira similar a páginas tradicionais, mas com a eficiência e a fluidez proporcionadas pelas Single Page Applications.
+
+Resumo
+<router-outlet>: Diretiva Angular que atua como um ponto de inserção para componentes baseados em rotas.
+Função: Renderiza o componente associado à rota ativa no local onde está inserida.
+Configuração: Definida através do módulo de roteamento (AppRoutingModule), associando caminhos de URL a componentes.
+Múltiplos Outlets: Suporta outlets nomeados para layouts complexos com múltiplas áreas de conteúdo dinâmico.
+Compreender e utilizar corretamente o <router-outlet> é fundamental para desenvolver aplicações Angular eficientes e bem estruturadas.
+
+O RouterModule é um módulo do Angular que permite definir rotas na sua aplicação, diferentes estratégias de correspondência de caminho, fácil acesso aos parâmetros de rota e proteções de rota para proteger os componentes contra acesso não autorizado.
+
+Na aula vimos a diretiva <router-outlet> que é responsável por renderizar a rota solicitada pelo usuário e por meio da propriedade routerLink podemos passar para um botão ou ancora o componente que será renderizado a partir dele.
+
+No projeto da aula não teremos, mas imagine que você esteja construindo uma página que possui um menu com links que redireciona para alguns componentes desta página, como no exemplo:
+
+Página de aplicação web com Alura, com os menus First e Second
+
+Perceba que a página /home é apresentada, mas na barra de menu nada indica que está nessa página. Se você conhece um pouco de Javascript talvez pode ter pensado em um evento de click e adicionar uma classe, mas isso daria muito trabalho. O RouterModule possui a propriedade routerLinkActive que é necessário apenas passar a classe com o estilo que será aplicado no link.
+
+app.component.html
+
+<nav class="navbar container full-width d-flex">
+    <ul class="d-flex  links">
+        <li
+            routerLink="/first"
+            routerLinkActive="active"
+            class="links-nav py-1"><a>First</a>
+        </li>
+        <li
+            routerLink="/second"
+            routerLinkActive="active"
+            class="links-nav py-1"><a>Second</a>
+        </li>
+    </ul>
+    <img
+        class="logo"
+        routerLink="/home"
+        routerLinkActive="active"
+        src="./assets/LogoAlurabranco.png" alt="">
+</nav>
+
+<main class="container m-width py-3">
+    <router-outlet></router-outlet>
+</main>
+Copiar código
+app.component.css
+
+.active{
+    border-bottom: 5px solid white;
+    color: white;
+    transition: 300ms ease-in;
+}
+.logo.active {
+    padding-bottom: 13px;
+}
