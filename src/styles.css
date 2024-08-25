@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
 
 * {
@@ -68,8 +67,11 @@ h2 {
       width: 960px;
   }
 }
-@media (min-width: 1200px) { /*Aqui, a media query @media (min-width: 1200px) significa que as regras CSS dentro desse bloco só serão aplicadas quando a largura da tela ou janela do navegador for igual ou superior a 1200 pixels. */
+@media (min-width: 1200px) {
   .container {
       width: 1140px;
   }
 }
+
+
+

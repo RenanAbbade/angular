@@ -1,28 +1,28 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
-import { PensamentosComponent } from './componentes/pensamentos/pensamentos.component';
 import { CriarPensamentoComponent } from './componentes/pensamentos/criar-pensamento/criar-pensamento.component';
-import { FormsModule } from '@angular/forms';
+import { ListarPensamentoComponent } from './componentes/pensamentos/listar-pensamento/listar-pensamento.component';
+import { PensamentoComponent } from './componentes/pensamentos/pensamento/pensamento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CabecalhoComponent,
     RodapeComponent,
-    PensamentosComponent,
-    CriarPensamentoComponent
+    CriarPensamentoComponent,
+    ListarPensamentoComponent,
+    PensamentoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule /* Para usar NgModel diretiva -> Data binding bidirecional no Angular é um recurso que permite a sincronização automática de dados entre o modelo (dados do componente) e a visualização (interface do usuário). Isso significa que qualquer alteração feita no modelo reflete imediatamente na interface, e qualquer alteração feita na interface reflete imediatamente no modelo. */
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
