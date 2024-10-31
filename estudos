@@ -1,5 +1,26 @@
 Decorator @Input
 
+
+Situação:
+
+import {Component, Input} from '@angular/core';
+
+@Component({
+  selector: 'app-user',
+  template: `
+    <p>The user's name is {{name}}</p>
+    <p>The user's name is {{name2}}</p>
+  `,
+  standalone: true,
+})
+export class UserComponent {
+
+  @Input() name = 'Simran'; 
+
+  name2: string = 'Renan'
+}
+
+
 O decorador `@Input()` é usado em Angular para expor propriedades de um componente filho para que possam ser configuradas diretamente pelo componente pai. Embora o código funcione sem `@Input()` para a propriedade `name2`, o decorador é essencial quando se deseja que o componente receba valores dinâmicos de fora.
 
 Vamos entender a motivação:
