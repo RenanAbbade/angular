@@ -1,0 +1,19 @@
+Decorator @Input
+
+O decorador `@Input()` é usado em Angular para expor propriedades de um componente filho para que possam ser configuradas diretamente pelo componente pai. Embora o código funcione sem `@Input()` para a propriedade `name2`, o decorador é essencial quando se deseja que o componente receba valores dinâmicos de fora.
+
+Vamos entender a motivação:
+
+1. **Permitir Comunicação Dinâmica entre Componentes**: O decorador `@Input()` permite que o valor da propriedade `name` seja definido dinamicamente pelo componente pai, tornando o componente mais flexível e reutilizável. Sem `@Input()`, o valor da variável `name2` seria estático, definido apenas dentro do próprio componente `UserComponent`.
+
+2. **Customização pelo Componente Pai**: Ao usar `@Input()`, o componente pai pode passar valores específicos para o componente `UserComponent`, adaptando o conteúdo para diferentes casos sem precisar modificar o componente filho em si. Exemplo:
+
+    ```typescript
+    <app-user [name]="'Pedro'"></app-user>
+    ```
+
+   Neste caso, o valor de `name` seria alterado para `"Pedro"` ao ser passado pelo componente pai, enquanto `name2` permaneceria `"Renan"`.
+
+3. **Reutilização do Componente**: Usar `@Input()` torna o componente `UserComponent` reutilizável em diferentes contextos e aplicações, sem exigir alterações no código interno. Ele pode exibir qualquer nome passado pelo pai, em vez de apenas um valor fixo.
+
+Em resumo, o `@Input()` é motivado pela necessidade de **flexibilidade e personalização de valores pelo componente pai**. Isso é especialmente útil quando o componente precisa responder a diferentes valores e contextos na aplicação.
